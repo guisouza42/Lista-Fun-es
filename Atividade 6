@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Conversao {
+
+    // Função que converte a hora de 24h para 12h com indicação de AM/PM
+    public static String converterPara12(int hora, int minuto) {
+        
+        String periodo = (hora < 12) ? "A" : "P";
+        
+        if (hora == 0) {
+            hora = 12;
+        } else if (hora > 12) {
+            hora -= 12;
+        }
+        return String.format("%d:%02d %s", hora, minuto, periodo);
+    }
+
+    public static void exibirResultado(int hora, int minuto) {
+        String horaConvertida = converterPara12(hora, minuto);
+        System.out.println("\nHora no formato 12h: " + horaConvertida);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite a hora: ");
+        int hora = scanner.nextInt();
+        System.out.print("Digite os minutos: ");
+        int minuto = scanner.nextInt();
+        
+        if(hora < 24){
+            exibirResultado(hora, minuto);
+        } else {
+            System.out.println("Hora inválida!");
+        }
+
+        System.out.print("\nDeseja converter outra hora? (S/N): ");
+        String resposta = scanner.next();
+        if (resposta.equalsIgnoreCase("S")) {
+            main(args); 
+        } else {
+            System.out.println("\nPrograma encerrado.");
+        }
+
+        scanner.close();
+    }
+}
